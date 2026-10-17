@@ -54,16 +54,16 @@ export const Embers: React.FC<{ start: number; count?: number }> = ({ start, cou
 };
 
 // ── 白热碎裂文字 ──
-export const ShatterText: React.FC<{ text: string; size: number }> = ({ text, size }) => {
+export const ShatterText: React.FC<{ text: string; size: number; hold?: number }> = ({ text, size, hold = 0 }) => {
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
 
   // 白热过曝 → 回落
   const heat = interpolate(f, [4, 10, 30], [0, 2.6, 1.0], { ...clamp, easing: theme.ease.out });
   // 碎裂抖动幅度：入场 0 → 稳定微颤 → 结尾爆散
-  const jitter = interpolate(f, [8, 26, 96, 124], [0, 11, 6, 74], { ...clamp, easing: theme.ease.inOut });
+  const jitter = interpolate(f, [8, 26, 96 + hold, 124 + hold], [0, 11, 6, 74], { ...clamp, easing: theme.ease.inOut });
   // 整体亮度/透明度（结尾溶解）
-  const dissolve = interpolate(f, [104, 126], [1, 0], { ...clamp, easing: theme.ease.in });
+  const dissolve = interpolate(f, [104 + hold, 126 + hold], [1, 0], { ...clamp, easing: theme.ease.in });
   // 入场
   const enter = interpolate(f, [4, 22], [0, 1], { ...clamp, easing: theme.ease.out });
   // 微呼吸

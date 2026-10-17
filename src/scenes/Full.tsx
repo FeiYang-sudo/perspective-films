@@ -294,15 +294,17 @@ const Cold: React.FC = () => {
         )}
       </Chrome>
       {!lead && (
-        <>
+        <Sequence from={156} durationInFrames={474}>
           <BgMesh hue="warm" />
           <Embers start={0} count={90} />
-          <ShatterText text="人生没有验收日" size={158} />
-          <Embers start={40} count={120} />
+          <ShatterText text="人生没有验收日" size={158} hold={230} />
+          <Embers start={40} count={110} />
+          <Embers start={170} count={110} />
+          <Embers start={300} count={120} />
           <Grade />
           <Grain />
           <Vignette />
-        </>
+        </Sequence>
       )}
     </AbsoluteFill>
   );
@@ -311,12 +313,12 @@ const Cold: React.FC = () => {
 // ══════════════ S6 · 数据来源（210 帧） ══════════════
 const Src: React.FC = () => {
   const rows = [
-    ["数据来源", theme.colors.white, 32],
-    ["育娲人口研究《中国生育成本报告 2024 版》", theme.colors.white, 27],
+    ["数据来源", theme.colors.white, 38],
+    ["育娲人口研究《中国生育成本报告 2024 版》", theme.colors.white, 32],
     ["教育部 · 2026 高考报名 / 2026 届毕业生 / 2025 考研报名", theme.colors.white, 24],
     ["麦可思《2025 年中国本科生就业报告》", theme.colors.white, 24],
     ["国家统计局 · 2026 年 8 月城镇 16—24 岁调查失业率", theme.colors.white, 24],
-    ["本片无配乐，音效为程序生成", theme.colors.dim, 22],
+    ["本片无配乐，音效为程序生成", theme.colors.dim, 24],
   ];
   return (
     <Chrome hue="warm">
