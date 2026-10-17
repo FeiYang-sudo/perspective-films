@@ -1,0 +1,61 @@
+name: render-film
+
+# 免费云机器渲染：4 核 / 16GB，比那台 2 核服务器快 4-6 倍
+on:
+  workflow_dispatch:
+    inputs:
+      comp:
+        description: "Composition id"
+        required: true
+        default: Sample20s
+      crf:
+        description: "画质（17 高 / 20 中）"
+        required: false
+        default: "18"
+  push:
+    paths:
+      - "src/**"
+      - ".github/workflows/render-film.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 装中文字体（片子里全是中文衬线）
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk fonts-noto-cjk-extra
+
+      - name: 装依赖
+        run: npm install --no-audit --no-fund
+
+      - name: 渲染
+        run: |
+          npx remotion render src/index.ts "${{ inputs.comp || 'Sample20s' }}" out/video.mp4 \
+            --concurrency=4 --crf "${{ inputs.crf || '18' }}" --codec h264
+
+      - name: 上传产物（Artifacts，90 天）
+        uses: actions/upload-artifact@v4
+        with:
+          name: video-${{ inputs.comp || 'Sample20s' }}
+          path: out/video.mp4
+          retention-days: 90
+
+      - name: 挂到 Release（永久可下载）
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="render-$(date -u +%Y%m%d-%H%M%S)"
+          gh release create "$tag" out/video.mp4 \
+            --title "${{ inputs.comp || 'Sample20s' }} · $(date -u +%F' '%H:%M)" \
+            --notes "GitHub Actions 自动渲染（${{ inputs.comp || 'Sample20s' }}，crf ${{ inputs.crf || '18' }}）"

@@ -1,0 +1,7 @@
+node_modules/
+out/
+*.log
+chk_*.png
+st_*.png
+*sheet*.png
+gold_frame.png
