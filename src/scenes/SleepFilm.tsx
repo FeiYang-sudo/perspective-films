@@ -94,7 +94,7 @@ const Standard: React.FC = () => {
                 <span style={{ fontSize: 40, marginLeft: 8 }}>小时</span>
               </span>
               <span style={{ fontFamily: theme.fonts.sans, fontSize: 26, color: theme.colors.dim }}>
-                最晚 {r.bed} 就寝
+                一般不晚于 {r.bed}
               </span>
             </div>
           );
@@ -102,7 +102,7 @@ const Standard: React.FC = () => {
         <div style={{ height: 26 }} />
         <SpringIn delay={220} y={16} blur={8}>
           <div style={{ fontFamily: theme.fonts.sans, fontSize: 30, color: theme.colors.gray ?? theme.colors.dim }}>
-            中国健康指南：6—18 岁学生，每晚 8—10 小时
+            全国爱卫办《睡眠健康核心信息》：中小学生 8—10 小时
           </div>
         </SpringIn>
       </AbsoluteFill>
@@ -153,15 +153,15 @@ const Reality: React.FC = () => {
         <Txt size={84} color={theme.colors.danger}>八成</Txt>
       </Beat>
       <Beat from={420} dur={110} top={676}>
-        <Txt size={34} color={theme.colors.dim}>上学日平均睡眠</Txt>
-        <Txt size={92} color={theme.colors.white}>
-          <Counter to={7.8} dur={26} decimals={1} />
+        <Txt size={34} color={theme.colors.dim}>高中生上学日平均睡眠</Txt>
+        <Txt size={96} color={theme.colors.white}>
+          <Counter to={7.2} dur={26} decimals={1} />
         </Txt>
         <Txt size={40} color={theme.colors.dim}>小时</Txt>
       </Beat>
       <Beat from={540} dur={100} top={700}>
-        <Txt size={38} color={theme.colors.dim}>比 2009 年少了</Txt>
-        <Txt size={62} color={theme.colors.gold}>0.3 小时</Txt>
+        <Txt size={34} color={theme.colors.dim}>全体青少年 7.8 小时，比 2009 年少了</Txt>
+        <Txt size={58} color={theme.colors.gold}>0.3 小时</Txt>
       </Beat>
       <Beat from={650} dur={120} top={676}>
         <Txt size={34} color={theme.colors.dim}>上学日睡满 8 小时的青少年</Txt>
@@ -255,7 +255,7 @@ const Causes: React.FC = () => {
         <div style={{ height: 20 }} />
         <SpringIn delay={230} y={14} blur={8}>
           <div style={{ fontFamily: theme.fonts.sans, fontSize: 28, color: theme.colors.dim }}>
-            很多孩子 12 点后才睡 → 深睡眠变少 → 影响认知恢复与激素分泌
+            很多孩子 12 点后才睡 → 深睡眠变少 → 影响认知恢复与激素分泌（归因口径：2019 白皮书·多选）
           </div>
         </SpringIn>
       </AbsoluteFill>
@@ -323,9 +323,10 @@ const Cost: React.FC = () => {
 const Region: React.FC = () => {
   const f = useCurrentFrame();
   const rows = [
-    { p: "北京", d: "过半人睡眠超过 8 小时", v: 1 },
-    { p: "浙江、广西", d: "紧随其后", v: 0.72 },
-    { p: "东部 → 西部", d: "整体东部优于西部", v: 0.45 },
+    { p: "北京", d: "睡眠状况评分 72.94", v: 1 },
+    { p: "浙江", d: "70.00", v: 0.88 },
+    { p: "广西", d: "69.41", v: 0.85 },
+    { p: "东部 → 西部", d: "整体东部略好于西部", v: 0.5 },
   ];
   return (
     <Chrome hue="warm">
