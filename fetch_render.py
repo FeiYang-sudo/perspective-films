@@ -6,7 +6,7 @@ import io, json, os, subprocess, time, urllib.request, urllib.error
 TOK = [l.split("=", 1)[1].strip() for l in io.open("/root/.hermes/.env", encoding="utf-8")
        if l.startswith("GITHUB_TOKEN=")][0]
 REPO = "FeiYang-sudo/perspective-films"
-OUT = "/root/perspective/shiba-remotion/out/film_1080p.mp4"
+OUT = "/root/perspective/shiba-remotion/out/sleep_1080p.mp4"
 
 
 def gh(path):

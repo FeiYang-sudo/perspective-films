@@ -7,7 +7,7 @@ on:
       comp:
         description: "Composition id"
         required: true
-        default: Film
+        default: SleepFilm
       crf:
         description: "画质（17 高 / 20 中）"
         required: false
@@ -41,13 +41,13 @@ jobs:
 
       - name: 渲染
         run: |
-          npx remotion render src/index.ts "${{ inputs.comp || 'Film' }}" out/video.mp4 \
+          npx remotion render src/index.ts "${{ inputs.comp || 'SleepFilm' }}" out/video.mp4 \
             --concurrency=4 --crf "${{ inputs.crf || '18' }}" --codec h264
 
       - name: 上传产物（Artifacts，90 天）
         uses: actions/upload-artifact@v4
         with:
-          name: video-${{ inputs.comp || 'Film' }}
+          name: video-${{ inputs.comp || 'SleepFilm' }}
           path: out/video.mp4
           retention-days: 90
 
@@ -57,5 +57,5 @@ jobs:
         run: |
           tag="render-$(date -u +%Y%m%d-%H%M%S)"
           gh release create "$tag" out/video.mp4 \
-            --title "${{ inputs.comp || 'Film' }} · $(date -u +%F' '%H:%M)" \
-            --notes "GitHub Actions 自动渲染（${{ inputs.comp || 'Film' }}，crf ${{ inputs.crf || '18' }}）"
+            --title "${{ inputs.comp || 'SleepFilm' }} · $(date -u +%F' '%H:%M)" \
+            --notes "GitHub Actions 自动渲染（${{ inputs.comp || 'SleepFilm' }}，crf ${{ inputs.crf || '18' }}）"
